@@ -1,0 +1,1 @@
+//This file will be for all functions making calls to the API i.e fetch, post etc.
