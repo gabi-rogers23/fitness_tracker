@@ -9,7 +9,7 @@ function getHeaders() {
   const currentToken = localStorage.getItem("auth_token");
   console.log("CURRENT TOKEN IN GET HEADERS:, ", currentToken);
 
-  if (currentToken !== "undefined") {
+  if (currentToken != null) {
     headers["Authorization"] = "Bearer " + currentToken;
   }
   console.log("Current Headers: " + JSON.stringify(headers));

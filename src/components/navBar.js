@@ -30,10 +30,11 @@ const NavBar = (props) => {
               </li>
               <li>
                 <NavLink
-                  to="/"
+                  to="/logIn"
                   onClick={()=>{
-                    props.setIsLoggedIn(false)
-                    localStorage.clear();
+                  props.setIsLoggedIn(false)
+                  localStorage.clear();
+                  console.log(localStorage.getItem("auth_token"))
                   }}
                   style={({ isActive }) => ({
                     color: isActive ? "green" : "blue",
