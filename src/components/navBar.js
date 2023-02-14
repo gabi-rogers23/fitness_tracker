@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const NavBar = () => {
   return (
     <header>
-      <h1>FITNESS TRACKER NAV</h1>
+      <h1>FITNESS TRACKER</h1>
       <nav>
         <ul>
           <li>
