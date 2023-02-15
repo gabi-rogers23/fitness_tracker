@@ -29,7 +29,9 @@ export async function registerNewUser(newUserName, newPassword) {
       body: JSON.stringify(sendData),
     });
     const data = await res.json();
-    localStorage.setItem("auth_token", data.token);
+    if (data.token) {
+      localStorage.setItem("auth_token", data.token);
+    }
 
     // console.log("REGISTER NEW USER RETURNING:", data);
     return data;
@@ -53,7 +55,9 @@ export async function logIn(userUsername, userPassword) {
       body: JSON.stringify(sendData),
     });
     const data = await res.json();
-    localStorage.setItem("auth_token", data.token);
+    if (data.token) {
+      localStorage.setItem("auth_token", data.token);
+    }
 
     // console.log("Login Data", data);
     // console.log("GET HEADERS FROM LOGIN", getHeaders());
