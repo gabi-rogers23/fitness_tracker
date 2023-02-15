@@ -19,8 +19,8 @@ function getHeaders() {
 export async function registerNewUser(newUserName, newPassword) {
   const sendData = { username: newUserName, password: newPassword };
 
-  console.log("REGISTER NEW USER: ", sendData);
-  console.log("REGISTER NEW USER STRINGIFY", JSON.stringify(sendData));
+  // console.log("REGISTER NEW USER: ", sendData);
+  // console.log("REGISTER NEW USER STRINGIFY", JSON.stringify(sendData));
 
   try {
     const res = await fetch(`${BASE_URL}/users/register`, {
@@ -31,7 +31,7 @@ export async function registerNewUser(newUserName, newPassword) {
     const data = await res.json();
     localStorage.setItem("auth_token", data.token);
 
-    console.log("REGISTER NEW USER RETURNING:", data);
+    // console.log("REGISTER NEW USER RETURNING:", data);
     return data;
   } catch (error) {
     throw error;
@@ -55,9 +55,63 @@ export async function logIn(userUsername, userPassword) {
     const data = await res.json();
     localStorage.setItem("auth_token", data.token);
 
-    console.log("Login Data", data);
-    console.log("GET HEADERS FROM LOGIN", getHeaders());
+    // console.log("Login Data", data);
+    // console.log("GET HEADERS FROM LOGIN", getHeaders());
     return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getAllActivities() {
+  try {
+    const res = await fetch(`${BASE_URL}/activities`);
+
+    const data = await res.json();
+
+    // console.log("GET ALL ACTIVITIES RETURNING: ", data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function createActivity(name, description) {
+  const sendData = {
+    name: name,
+    description: description,
+  };
+  try {
+    const res = await fetch(`${BASE_URL}/activities`, {
+      method: "POST",
+      body: JSON.stringify(sendData),
+      headers: getHeaders()
+    });
+
+    const data = await res.json();
+    console.log("CREATE ACTIVITY RETURNING: ", data)
+    return data
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function editActivity(name, description, id) {
+  console.log(id)
+  const sendData = {
+    name: name,
+    description: description,
+  };
+  try {
+    const res = await fetch(`${BASE_URL}/activities/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(sendData),
+      headers: getHeaders()
+    });
+
+    const data = await res.json();
+    console.log("EDIT ACTIVITY RETURNING: ", data)
+    return data
   } catch (error) {
     throw error;
   }

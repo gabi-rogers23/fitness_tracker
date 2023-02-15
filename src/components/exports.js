@@ -19,3 +19,6 @@ export { default as LogIn } from "./logIn";
 export { default as Profile } from "./profile";
 export { default as Routines } from "./routines";
 export { default as Register } from "./register";
+export { default as Activities } from "./activities";
+export { default as NewActivitiesForm } from "./newActivitiesForm";
+export  { default as UpdateActivity } from "./updateActivity";

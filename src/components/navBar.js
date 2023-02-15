@@ -76,6 +76,15 @@ const NavBar = (props) => {
               ROUTINES
             </NavLink>
           </li>
+
+          <li>
+            <NavLink
+              to="/activities"
+              style={({ isActive }) => ({ color: isActive ? "green" : "blue" })}
+            >
+              ACTIVITIES
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>
