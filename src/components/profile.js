@@ -1,81 +1,88 @@
 import React, { useEffect, useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { BASE_URL, getUserProfile } from "../api/api";
 
-const Profile() {
-    return (
+const Profile = ({ setOnline }) => {
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  
+  const currentToken = localStorage.getItem("auth_token");
+
+  useEffect(() => {
+    const isLoggedIn = async () => {
+      try {
+        const userProfile = await getUserProfile(BASE_URL, currentToken);
+        setProfile(userProfile);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    isLoggedIn();
+  }, [currentToken]);
+
+  const logout = () => {
+    setOnline(false);
+    navigate('/');
+  };
+  
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
+  if (!profile) {
+    return <h2>You are not logged in!</h2>;
+  }
+
+  return (
+    <div className="profile-container">
+      <div>
+        <h1>Profile</h1>
+        <h3>Welcome {profile.username}!</h3>
+        <p>Username: {profile.username}</p>
+        <p>User ID: {profile.id}</p>
         <div>
-          <Routines />
-          <Activities />
+          <h4>Routines:</h4>
+          {profile.routines?.map((routine, index) => (
+            <div key={routine._id} className="profile-routine">
+              <h4>Name: {routine.name}</h4>
+              <p>Description: {routine.description}</p>
+              <p>Activities: {routine.activities.map((activity, index) => (
+                <span key={activity._id} className="profile-activity">{activity.name}</span>
+              ))}</p>
+            </div>
+          ))}
         </div>
-      );
-}
-
-// const Profile = ({ APIURL, token, setOnline }) => {
-//   const [userData, setUserData] = useState();
-// //   let history = useHistory();
-
-//   useEffect(() => {
-//     loggedInUser();
-//   }, []);
-
-//   //api start
-//   const loggedInUser = async () => {
-//     const res = await fetch(`${APIURL}/users/me`, {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`,
-//       },
-//     })
-//       .then((res) => res.json())
-//       .then((result) => {
-//         console.log(result.data);
-//         setUserData(result.data);
-//       })
-//       .catch(console.error);
-//   };
-//   //api end
-
-//   const logout = () => {
-//     setOnline(false);
-//     // history.push('./');
-//   };
-
-//   return (
-//     <div className="profile-container">
-//       {userData ? (
-//         <div>
-//           <h1>Profile</h1>
-//           <h3>Welcome {userData.username}!</h3>
-//           <p>Username: {userData.username}</p>
-//           <p>User ID: {userData._id}</p>
-//           <div>
-//             <h4>Posts:</h4>
-//             {userData.posts.map((post, index) => (
-//               <div key={post._id} className="profile-post">
-//                 <h4>Title: {post.title}</h4>
-//                 <p>Description: {post.description}</p>
-//                 <p>Price: {post.price}</p>
-//                 <p>Location: {post.location}</p>
-//               </div>
-//             ))}
-//           </div>
-//           <div>
-//             <h4>Messages:</h4>
-//             {userData.messages.map((message, index) => (
-//               <div key={index} className="profile-message">
-//                 <h4>Content: {message.content}</h4>
-//                 <p>From User: {message.fromUser.username}</p>
-//                 <p>On Post: {message.post.title}</p>
-//               </div>
-//             ))}
-//           </div>
-//           <button onClick={logout}>Logout</button>
-//         </div>
-//       ) : (
-//         <h1> You are not logged in!</h1>
-//       )}
-//     </div>
-//   );
-// };
+        <div>
+          <h4>My Routines:</h4>
+          {profile.myRoutines?.map((myRoutine, index) => (
+            <div key={myRoutine._id} className="profile-my-routine">
+              <h4>Routine: {myRoutine.routine.name}</h4>
+              <p>Frequency: {myRoutine.frequency}</p>
+              <p>Days: {myRoutine.days.join(", ")}</p>
+              <p>Start Time: {myRoutine.startTime}</p>
+            </div>
+          ))}
+        </div>
+        <div>
+          <h4>My Activities:</h4>
+          {profile.activities?.map((activity, index) => (
+            <div key={activity._id} className="profile-activity">
+              <h4>Name: {activity.name}</h4>
+              <p>Description: {activity.description}</p>
+              <p>Routines: {activity.routines.map((routine, index) => (
+                <span key={routine._id} className="profile-routine">{routine.name}</span>
+              ))}</p>
+            </div>
+          ))}
+        </div>
+        <button onClick={logout}>Logout</button>
+      </div>
+    </div>
+  );
+};
 
 export default Profile;

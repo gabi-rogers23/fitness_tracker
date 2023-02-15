@@ -120,3 +120,23 @@ export async function editActivity(name, description, id) {
     throw error;
   }
 }
+
+//profile
+export async function getUserProfile(BASE_URL, token) {
+  try {
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      const error = await response.json();
+      throw new Error(error.message || response.statusText);
+    }
+  } catch (error) {
+    throw new Error(`Failed to get user profile: ${error.message}`);
+  }
+}

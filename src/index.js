@@ -42,7 +42,17 @@ const App = () => {
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={
+            <Profile
+                  username={username}
+                  setUsername={setUsername}
+                  password={password}
+                  setPassword={setPassword}
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              } 
+            />
             <Route path="/routines" element={<Routines />} />
             <Route
               path="/activities"
