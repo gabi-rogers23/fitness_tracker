@@ -1,9 +1,10 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
 
 const Home = () => {
     return (
-        <h1>FITNESS TRACKER HOME PAGE</h1>
+        <div className="homeContainer">
+            <div className="homePhoto"><img alt="" src="images/home.jpg"></img></div>
+        </div>
     )
 }
 
