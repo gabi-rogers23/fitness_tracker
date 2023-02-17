@@ -1,8 +1,10 @@
-import React from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logIn } from "../api/api";
 
 const LogIn = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   return (
     <div className="container">
@@ -12,10 +14,10 @@ const LogIn = (props) => {
           USERNAME:
           <input
             required
-            value={props.username}
+            value={username}
             onChange={(e) => {
               e.preventDefault();
-              props.setUsername(e.target.value);
+              setUsername(e.target.value);
             }}
           ></input>
         </div>
@@ -25,10 +27,10 @@ const LogIn = (props) => {
           <input
             required
             type="password"
-            value={props.password}
+            value={password}
             onChange={(e) => {
               e.preventDefault();
-              props.setPassword(e.target.value);
+              setPassword(e.target.value);
             }}
           ></input>
         </div>
@@ -36,15 +38,12 @@ const LogIn = (props) => {
           <button
             onClick={async (e) => {
               e.preventDefault();
-              const user = await logIn(props.username, props.password);
+              const user = await logIn(username, password);
               console.log(user);
               if (user.error) {
                 alert(user.message);
               } else {
-                props.setUsername("");
-                props.setPassword("");
-                props.setIsLoggedIn(true);
-                navigate("/profile");
+                props.storeUser(username, user.token);
               }
             }}
           >

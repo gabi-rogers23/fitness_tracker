@@ -1,8 +1,10 @@
-import React from "react";
+import { React, useState } from "react";
 import { registerNewUser } from "../api/api";
 import { useNavigate } from "react-router-dom";
 
 const Register = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
   return (
     <div>
@@ -14,10 +16,10 @@ const Register = (props) => {
           USERNAME:
           <input
             required
-            value={props.username}
+            value={username}
             onChange={(event) => {
               event.preventDefault();
-              props.setUsername(event.target.value);
+              setUsername(event.target.value);
             }}
           ></input>
         </div>
@@ -26,10 +28,10 @@ const Register = (props) => {
           PASSWORD:
           <input
             required
-            value={props.password}
+            value={password}
             onChange={(event) => {
               event.preventDefault();
-              props.setPassword(event.target.value);
+              setPassword(event.target.value);
             }}
           ></input>
         </div>
@@ -37,17 +39,13 @@ const Register = (props) => {
         <button
           onClick={async (event) => {
             event.preventDefault();
-            const newUser = await registerNewUser(
-              props.username,
-              props.password
-            );
+            const newUser = await registerNewUser(username, password);
             console.log("NEW USER MESSAGE" + newUser.message);
             if (newUser.error) {
               alert(newUser.message);
             } else {
-              props.setUsername("");
-              props.setPassword("");
-              navigate("/profile");
+              props.storeUser(username, newUser.token);
+              
             }
           }}
         >
@@ -59,8 +57,8 @@ const Register = (props) => {
         <button
           onClick={(event) => {
             event.preventDefault();
-            props.setUsername("");
-            props.setPassword("");
+            setUsername("");
+            setPassword("");
             navigate("/logIn");
           }}
         >

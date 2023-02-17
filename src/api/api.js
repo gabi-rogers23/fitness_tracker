@@ -139,3 +139,37 @@ export async function getUserProfile(BASE_URL, token) {
     throw new Error(`Failed to get user profile: ${error.message}`);
   }
 }
+
+//UpdateRoutine
+
+export async function editRoutine(name, goal, isPublic, id) {
+  console.log(id);
+  const sendData = {
+    name: name,
+    goal: goal,
+    isPublic: isPublic,
+  };
+  try {
+    const res = await fetch(`${BASE_URL}/routines/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify(sendData),
+      headers: getHeaders(),
+    });
+
+    const data = await res.json();
+    console.log("EDIT ROUTINE RETURNING: ", data);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+export async function deleteRoutine(id) {
+  try {
+    await fetch(`${BASE_URL}/routines/${id}`, {
+      method: "DELETE",
+      headers: getHeaders(),
+    });
+  } catch {
+    console.error("error");
+  }
+}
