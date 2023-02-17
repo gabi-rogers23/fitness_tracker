@@ -7,10 +7,12 @@ const LogIn = (props) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   return (
-    <div className="container">
-      <div className="subHeader"> Log In! </div>
-      <form className="logInForm">
-        <div>
+    <div className="tabContainer">
+      <div className="createAccount"> Log In! </div>
+      <br />
+      <br />
+      <form>
+        <div className="registerForm">
           USERNAME:
           <input
             required
@@ -20,9 +22,7 @@ const LogIn = (props) => {
               setUsername(e.target.value);
             }}
           ></input>
-        </div>
-        <br />
-        <div>
+          <br />
           PASSWORD:
           <input
             required
@@ -33,8 +33,6 @@ const LogIn = (props) => {
               setPassword(e.target.value);
             }}
           ></input>
-        </div>
-        <div className="logInButton">
           <button
             onClick={async (e) => {
               e.preventDefault();
@@ -52,14 +50,14 @@ const LogIn = (props) => {
         </div>
       </form>
 
-      <div className="logInUserQ">
-        Not already a user? <p />
+      <div className="formQ">
+        Not already a user? <br />
         <button
           className="logInCreateAccount"
           onClick={(e) => {
             e.preventDefault();
-            props.setUsername("");
-            props.setPassword("");
+            setUsername("");
+            setPassword("");
             navigate("/register");
           }}
         >

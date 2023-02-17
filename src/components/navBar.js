@@ -40,14 +40,14 @@ const NavBar = (props) => {
         <>
           <NavLink
             to="/profile"
-            className={(navData) => (navData.isActive ? "activeR" : "navR")}
+            className={(navData) => (navData.isActive ? "activeR" : "navButton")}
             >
-            Profile
+            PROFILE
           </NavLink>
 
           <NavLink
             to="/logIn"
-            className={(navData) => (navData.isActive ? "activeR" : "navR")}
+            className={(navData) => (navData.isActive ? "activeR" : "navButton")}
             onClick={() => {
               props.setIsLoggedIn(false);
               localStorage.clear();
