@@ -13,15 +13,7 @@ const UpdateActivity = (props) => {
     <div>
       <h2>Update Activity</h2>
       <form>
-        Name:
-        <input
-          required
-          value={name}
-          onChange={(e) => {
-            e.preventDefault();
-            setName(e.target.value);
-          }}
-        ></input>
+        <div>Name: {name}</div>
         Description:
         <input
           required

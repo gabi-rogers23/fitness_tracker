@@ -72,7 +72,7 @@ export async function getAllActivities() {
 
     const data = await res.json();
 
-    // console.log("GET ALL ACTIVITIES RETURNING: ", data);
+    console.log("GET ALL ACTIVITIES RETURNING: ", data);
     return data;
   } catch (error) {
     throw error;
@@ -92,7 +92,7 @@ export async function createActivity(name, description) {
     });
 
     const data = await res.json();
-    console.log("CREATE ACTIVITY RETURNING: ", data);
+    // console.log("CREATE ACTIVITY RETURNING: ", data);
     return data;
   } catch (error) {
     throw error;
@@ -113,7 +113,7 @@ export async function editActivity(name, description, id) {
     });
 
     const data = await res.json();
-    console.log("EDIT ACTIVITY RETURNING: ", data);
+    // console.log("EDIT ACTIVITY RETURNING: ", data);
     return data;
   } catch (error) {
     throw error;

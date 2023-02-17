@@ -1,92 +1,64 @@
 import { React } from "react";
 import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = (props) => {
+  const navigate = useNavigate()
   return (
     <header>
-      <h1>FITNESS TRACKER</h1>
+      <div className="nameLogo">
+        <img src="/images/logo.png" alt=""></img>
+        <div className="name" onClick={((e)=>{
+          e.preventDefault()
+          navigate("/") 
+        })}>FITNESS TRAC.KR</div>
+      </div>
       <nav>
-        <ul>
-          <li>
-            <NavLink
-              to="/"
-              end
-              style={({ isActive }) => ({ color: isActive ? "green" : "blue" })}
-            >
-              HOME
-            </NavLink>
-          </li>
-          {localStorage.getItem("auth_token") ? (
-            <>
-              <li>
-                <NavLink
-                  to="/profile"
-                  style={({ isActive }) => ({
-                    color: isActive ? "green" : "blue",
-                  })}
-                >
-                  PROFILE
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/logIn"
-                  onClick={()=>{
-                  props.setIsLoggedIn(false)
+        <div>
+          <NavLink to="/" end />
+        </div>
+        <div className="centerNav">
+          <NavLink to="/routines" className={(navData) => navData.isActive ? "active" : ""}>Routines</NavLink>
+        </div>
+
+        <div className="centerNav">
+          <NavLink to="/activities" className={(navData) => navData.isActive ? "active" : ""}>Activities</NavLink>
+        </div>
+        </nav>
+        <nav className="rightNav">
+        {localStorage.getItem("auth_token") ? (
+          <>
+            <div>
+              <NavLink to="/profile" className={(navData) => navData.isActive && "activeR"}>Profile</NavLink>
+            </div>
+            <div>
+              <NavLink
+                to="/logIn"
+                className={(navData) => navData.isActive ? "activeR" : ""}
+                onClick={() => {
+                  props.setIsLoggedIn(false);
                   localStorage.clear();
-                  console.log(localStorage.getItem("auth_token"))
-                  }}
-                  style={({ isActive }) => ({
-                    color: isActive ? "green" : "blue",
-                  })} >
-                  LOG OUT
-                </NavLink>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <NavLink
-                  to="/logIn"
-                  style={({ isActive }) => ({
-                    color: isActive ? "green" : "blue",
-                  })}
-                >
-                  LOG IN
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/register"
-                  style={({ isActive }) => ({
-                    color: isActive ? "green" : "blue",
-                  })}
-                >
-                  REGISTER
-                </NavLink>
-              </li>
-            </>
-          )}
+                  console.log(localStorage.getItem("auth_token"));
+                }}
+              >
+                LOG OUT
+              </NavLink>
+            </div>
+          </>
+        ) : (
+          <>
+            <div>
+              <NavLink className={(navData) => navData.isActive ? "activeR" : ""} to="/logIn">LOG IN</NavLink>
+            </div>
+            <div>
+              <NavLink className={(navData) => navData.isActive ? "activeR": ""} to="/register">REGISTER</NavLink>
+            </div>
+            
+          </>
+        )}
 
-          <li>
-            <NavLink
-              to="/routines"
-              style={({ isActive }) => ({ color: isActive ? "green" : "blue" })}
-            >
-              ROUTINES
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink
-              to="/activities"
-              style={({ isActive }) => ({ color: isActive ? "green" : "blue" })}
-            >
-              ACTIVITIES
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+</nav>
+      
     </header>
   );
 };
