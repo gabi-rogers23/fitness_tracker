@@ -10,11 +10,11 @@ const UpdateActivity = (props) => {
   );
   const navigate = useNavigate();
   return (
-    <div>
+    <div className="tabContainer">
       <h2>Update Activity</h2>
-      <form>
-        <div>Name: {name}</div>
-        Description:
+      <form className="activityForm">
+        <div><b>Name:</b> {name}</div>
+        <div><b>Description:</b>
         <input
           required
           value={description}
@@ -22,8 +22,8 @@ const UpdateActivity = (props) => {
             e.preventDefault();
             setDescription(e.target.value);
           }}
-        ></input>
-        <button
+        ></input></div>
+        <div className="updateAButton"><button
           onClick={async (e) => {
             e.preventDefault();
             console.log(name, description);
@@ -53,6 +53,7 @@ const UpdateActivity = (props) => {
         >
           Cancel
         </button>
+        </div>
       </form>
     </div>
   );

@@ -72,14 +72,13 @@ const App = () => {
             path="/activities"
             element={
               <Activities
-                isLoggedIn={token}
                 setFeaturedActivity={setFeaturedActivity}
               />
             }
           />
           <Route
             path="/updateActivity"
-            element={<UpdateActivity featuredActivity={featuredActivity} />}
+            element={<UpdateActivity featuredActivity={featuredActivity} setFeaturedActivity={setFeaturedActivity}/>}
           />
           <Route
             path="/register"

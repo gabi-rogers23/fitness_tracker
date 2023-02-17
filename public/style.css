@@ -106,7 +106,6 @@ button:focus {
 .homeContainer {
   align-self: flex-start;
   margin-top: 15px;
-  border: 1px solid red;
 }
 
 .homePhoto {
@@ -158,3 +157,34 @@ button:focus {
 
 /* ACTIVITIES */
 
+.activity {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid black;
+  height: 100px;
+  width: 600px;
+  margin-top: 15px;
+}
+
+.edit {
+  align-self: flex-end;
+  width: 100px;
+}
+
+.activityForm {
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  width: 400px;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.updateAButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 400px;
+}
