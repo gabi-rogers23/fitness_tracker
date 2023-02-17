@@ -34,9 +34,9 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div >
       <NavBar token={token} setIsLoggedIn={setToken} />
-      <div>
+      <div className="mainContainer">
         <Routes>
           <Route exact strict path="/" element={<Home />} />
           <Route path="/logIn" element={<LogIn storeUser={storeUser} />} />

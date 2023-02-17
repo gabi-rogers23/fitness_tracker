@@ -3,62 +3,78 @@ import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <header>
       <div className="nameLogo">
         <img src="/images/logo.png" alt=""></img>
-        <div className="name" onClick={((e)=>{
-          e.preventDefault()
-          navigate("/") 
-        })}>FITNESS TRAC.KR</div>
+        <div
+          className="name"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate("/");
+            <NavLink to="/" end />
+          }}
+        >
+          FITNESS TRAC.KR
+        </div>
       </div>
-      <nav>
-        <div>
-          <NavLink to="/" end />
-        </div>
-        <div className="centerNav">
-          <NavLink to="/routines" className={(navData) => navData.isActive ? "active" : ""}>Routines</NavLink>
-        </div>
+<div className="mNavDiv">
+      <NavLink
+        to="/routines"
+        className={(navData) => (navData.isActive ? "active" : "middleNav")}
+      >
+        Routines
+      </NavLink>
 
-        <div className="centerNav">
-          <NavLink to="/activities" className={(navData) => navData.isActive ? "active" : ""}>Activities</NavLink>
-        </div>
-        </nav>
-        <nav className="rightNav">
-        {localStorage.getItem("auth_token") ? (
-          <>
-            <div>
-              <NavLink to="/profile" className={(navData) => navData.isActive && "activeR"}>Profile</NavLink>
-            </div>
-            <div>
-              <NavLink
-                to="/logIn"
-                className={(navData) => navData.isActive ? "activeR" : ""}
-                onClick={() => {
-                  props.setIsLoggedIn(false);
-                  localStorage.clear();
-                  console.log(localStorage.getItem("auth_token"));
-                }}
-              >
-                LOG OUT
-              </NavLink>
-            </div>
-          </>
-        ) : (
-          <>
-            <div>
-              <NavLink className={(navData) => navData.isActive ? "activeR" : ""} to="/logIn">LOG IN</NavLink>
-            </div>
-            <div>
-              <NavLink className={(navData) => navData.isActive ? "activeR": ""} to="/register">REGISTER</NavLink>
-            </div>
-            
-          </>
-        )}
+      <NavLink
+        to="/activities"
+        className={(navData) => (navData.isActive ? "active" : "middleNav")}
+      >
+        Activities
+      </NavLink>
+      </div>
+      <div className="rNavDiv">
 
-</nav>
-      
+      {localStorage.getItem("auth_token") ? (
+        <>
+          <NavLink
+            to="/profile"
+            className={(navData) => (navData.isActive ? "activeR" : "navR")}
+            >
+            Profile
+          </NavLink>
+
+          <NavLink
+            to="/logIn"
+            className={(navData) => (navData.isActive ? "activeR" : "navR")}
+            onClick={() => {
+              props.setIsLoggedIn(false);
+              localStorage.clear();
+              console.log(localStorage.getItem("auth_token"));
+            }}
+            >
+            LOG OUT
+          </NavLink>
+        </>
+      ) : (
+        <>
+          <NavLink
+            className={(navData) => (navData.isActive ? "activeR" : "navButton")}
+            to="/logIn"
+            >
+            LOG IN
+          </NavLink>
+
+          <NavLink
+            className={(navData) => (navData.isActive ? "activeR" : "navButton")}
+            to="/register"
+            >
+            REGISTER
+          </NavLink>
+        </>
+      )}
+      </div>
     </header>
   );
 };

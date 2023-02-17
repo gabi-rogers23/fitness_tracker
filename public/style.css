@@ -4,14 +4,7 @@
     box-sizing: border-box;
     font-family: 'Josefin Sans', sans-serif;
   }
-  
-  body {
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
-  }
-  
+
   header {
     display: flex;
     flex-flow: row wrap;
@@ -21,72 +14,107 @@
     height: 50px;
   }
 
+  body {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+ .mainContainer{
+  width: 1200px;
+  height: 1000px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* border: 1px solid blue; */
+ } 
+  
+  button {
+    display: inline-block;
+    border: none;
+    padding: .5rem;
+    margin: 0;
+    text-decoration: none;
+    font-size: .75rem;
+    cursor: pointer;
+    text-align: center;
+}
+
+button:hover,
+button:focus {
+    background: darkgray;
+}
+
 /* HOME PAGE */
 
 .nameLogo {
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: flex-start;
   align-items: center;
-  width: fit-content;
-  padding: 10px;
 }
 
 .name {
-  margin-left: 15px;
-  font-size: large;
-  font-family: 'Josefin Sans', sans-serif;
+  margin-left: 5px;
   letter-spacing: 3px;
+  margin-top: 3px;
 }
 
-nav {
-  display: flex;
-  flex-flow: row wrap;
-  width: 300px;
-  height: 25px;
-  margin-top: 20px;
-}
-
-.centerNav a {
-  margin-left: 30px;
-  text-decoration: none;
-  color: black;
-  justify-content: center;
-  align-items: center;
-}
-
-.active {
-  font-weight: bold;
-}
-
-.rightNav {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.rightNav a {
-  color: white;
+.navButton {
   background-color: black;
-  padding: 12px;
-  font-size: small;
-  margin-left: 15px; 
+  color: #ffffff;
+  margin-left: 15px;
+  padding: 8px;
   text-decoration: none;
+  text-align: center;
+  font-size: small;
 }
 
 .activeR {
-text-decoration: underline;
+  background-color: darkgray;
+  color: #ffffff;
+  margin-left: 15px;
+  padding: 8px;
+  text-decoration: none;
+  text-align: center;
+  font-size: small;
 }
 
-.homeContainer{
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: center;
-  width: 1200px;
+.mNavDiv .middleNav {
+  margin-left: 15px;
+  text-decoration: none;
+  color: black;
+}
+
+.active {
+  margin-left: 15px;
+  text-decoration: none;
+  color: black;
+  border-bottom: 2px solid black;
+}
+
+.homeContainer {
+  align-self: flex-start;
+  margin-top: 15px;
 }
 
 .homePhoto {
-  margin-top: 20px;
+  height: 1000px;
+  width: 1300px;
+  background-size: contain;
+  background-image: url("images/home.jpg");
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+.homeTag {
+  color: white;
+  font-size: 4em;
+  margin-left: 300px;
+  padding-top: 75px;
+  text-align: center;
+}
+
+.started {
+  padding-top: 50px;
+  font-size: .5em;
 }
