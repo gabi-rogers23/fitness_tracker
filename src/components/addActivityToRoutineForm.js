@@ -11,8 +11,7 @@ function AddActivityToRoutineForm(props) {
   const [duration, setDuration] = useState(0)
 
   useEffect(() => {
-   const allActivities = getAllActivities()
-   setActivities(allActivities);
+    getAllActivities().then((allActivities) => setActivities(allActivities));
   }, []);
 
   const handleSubmit = async (event) => {
