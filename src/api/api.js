@@ -173,3 +173,15 @@ export async function deleteRoutine(id) {
     console.error("error");
   }
 }
+
+export async function getUserRoutines(BASE_URL, userName) {
+  try {
+    const res = await fetch(`${BASE_URL}/users/${userName}/routines`);
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
