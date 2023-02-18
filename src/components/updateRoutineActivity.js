@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BASE_URL, deleteRoutineActivity, getHeaders } from "../api/api";
 
-function UpdateRoutineActivity({ routineActivity, onUpdateActivity }) {
-  const [activity, setActivity] = useState(routineActivity)
-  const [count, setCount] = useState(activity.count);
-  const [duration, setDuration] = useState(activity.duration);
-
-  useEffect(() => {
-    console.log("ROUTINE ACTIVITY IN UPDATE ROUTINE ACTIVITY", activity)
-    setCount(activity.count)
-    setDuration(activity.duration)
-  }, [activity]);
+function UpdateRoutineActivity({ routineActivity, onUpdateActivity, onRemovedActivity }) {
+  const [count, setCount] = useState(routineActivity.count);
+  const [duration, setDuration] = useState(routineActivity.duration);
 
   const handleCountChange = (e) => {
     setCount(parseInt(e.target.value));
@@ -50,6 +43,7 @@ function UpdateRoutineActivity({ routineActivity, onUpdateActivity }) {
       <button onClick={(async (e)=>{
         e.preventDefault();
         await deleteRoutineActivity(routineActivity.routineActivityId)
+        onRemovedActivity(routineActivity)
       })}>Delete Activity</button>
     </div>
   );

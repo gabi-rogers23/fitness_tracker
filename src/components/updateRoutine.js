@@ -7,7 +7,7 @@ const UpdateRoutine = (props) => {
   const [name, setName] = useState(props.featuredRoutine.name);
   const [goal, setGoal] = useState(props.featuredRoutine.goal);
   const [isPublic, setIsPublic] = useState(props.featuredRoutine.isPublic);
-  const [activities, setActivies] = useState(props.featuredRoutine.activities);
+  const [activities, setActivities] = useState(props.featuredRoutine.activities);
 
   const navigate = useNavigate();
   useEffect(() => {}, [activities]);
@@ -20,14 +20,18 @@ const UpdateRoutine = (props) => {
     const activityToUpdate = newActivities[location];
     activityToUpdate.count = editedActivity.count;
     activityToUpdate.duration = editedActivity.duration;
-    setActivies(newActivities);
+    setActivities(newActivities);
   };
 
   const onAddActivity = (addedActivity) => {
       const newActivities = [...activities];
       newActivities.push(addedActivity)
-      setActivies(newActivities)
+      setActivities(newActivities)
   }
+
+  const onRemovedActivity = (removedActivity) => {
+    setActivities(activities.filter((activity) => activity.id !== removedActivity.id))
+  };
 
   return (
     <div>
@@ -67,6 +71,7 @@ const UpdateRoutine = (props) => {
               <UpdateRoutineActivity
                 routineActivity={activity}
                 onUpdateActivity={onUpdateActivity}
+                onRemovedActivity={onRemovedActivity}
               />
             </div>
           ))}
