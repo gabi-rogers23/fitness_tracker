@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BASE_URL, deleteRoutineActivity, getHeaders } from "../api/api";
 
-function UpdateRoutineActivity({ routineActivity, onAddRoutine }) {
-  console.log("ROUTINE ACTIVITY IN UPDATE ROUTINE ACTIVITY", routineActivity)
-  const [count, setCount] = useState(routineActivity.count);
-  const [duration, setDuration] = useState(routineActivity.duration);
+function UpdateRoutineActivity({ routineActivity, onUpdateActivity }) {
+  const [activity, setActivity] = useState(routineActivity)
+  const [count, setCount] = useState(activity.count);
+  const [duration, setDuration] = useState(activity.duration);
+
+  useEffect(() => {
+    console.log("ROUTINE ACTIVITY IN UPDATE ROUTINE ACTIVITY", activity)
+    setCount(activity.count)
+    setDuration(activity.duration)
+  }, [activity]);
 
   const handleCountChange = (e) => {
     setCount(parseInt(e.target.value));
@@ -18,7 +24,7 @@ function UpdateRoutineActivity({ routineActivity, onAddRoutine }) {
     try {
       e.preventDefault()
 
-      await onAddRoutine()
+      // await onAddRoutine()
 
       const response = await fetch(
         `${BASE_URL}/routine_activities/${routineActivity.routineActivityId}`,
@@ -29,6 +35,7 @@ function UpdateRoutineActivity({ routineActivity, onAddRoutine }) {
         }
       );
       const data = await response.json();
+      onUpdateActivity(data)
       console.log(data);
     } catch (error) {
       console.error(error);

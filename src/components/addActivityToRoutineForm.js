@@ -2,13 +2,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { getAllActivities, BASE_URL } from "../api/api";
 
-
 function AddActivityToRoutineForm(props) {
   const [activities, setActivities] = useState([]);
-  const [activitiesToAdd, setActivitiesToAdd] = useState([])
   const [selectedActivityId, setSelectedActivityId] = useState("");
-  const [count, setCount] = useState(0)
-  const [duration, setDuration] = useState(0)
+  const [count, setCount] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     getAllActivities().then((allActivities) => setActivities(allActivities));
@@ -23,7 +21,7 @@ function AddActivityToRoutineForm(props) {
       duration: duration,
     };
 
-console.log("FEATURED ROUTINE ",props.featuredRoutine)
+    console.log("FEATURED ROUTINE ", props.featuredRoutine);
 
     try {
       const response = await fetch(
@@ -40,12 +38,15 @@ console.log("FEATURED ROUTINE ",props.featuredRoutine)
         throw new Error("Failed to add activity to routine");
       }
       const data = await response.json();
-    setActivitiesToAdd([...activitiesToAdd, data]);
+      props.onAddActivity(data);
+      setCount(0)
+      setDuration(0)
+      setSelectedActivityId("")
     } catch (error) {
       console.error(error);
     }
   };
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <div>

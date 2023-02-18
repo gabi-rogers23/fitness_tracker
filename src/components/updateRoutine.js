@@ -1,15 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { editRoutine, getRoutines } from "../api/api"; // import the API function to edit a routine
 import { useNavigate } from "react-router-dom";
-import  { AddActivityToRoutineForm, UpdateRoutineActivity } from "./exports"
+import { AddActivityToRoutineForm, UpdateRoutineActivity } from "./exports";
 
 const UpdateRoutine = (props) => {
+  const [routine, setRoutine] = useState(props.featuredRoutine);
+  const [name, setName] = useState(routine.name);
+  const [goal, setGoal] = useState(routine.goal);
+  const [isPublic, setIsPublic] = useState(routine.isPublic);
+  const [activities, setActivies] = useState(routine.activities);
 
-  const [name, setName] = useState(props.featuredRoutine.name);
-  const [goal, setGoal] = useState(props.featuredRoutine.goal);
-  const [isPublic, setIsPublic] = useState(props.featuredRoutine.isPublic);
   const navigate = useNavigate();
-console.log("FEATURED ROUTINE IN UPDATE ROUTINE: ", props.featuredRoutine)
+
+  useEffect(() => {}, [activities]);
+
+  const onUpdateActivity = (editedActivity) => {
+    const newActivities = [...activities];
+    const location = newActivities.findIndex(
+      (activity) => activity.id === editedActivity.activityId
+    );
+    const activityToUpdate = newActivities[location];
+    activityToUpdate.count = editedActivity.count;
+    activityToUpdate.duration = editedActivity.duration;
+    setActivies(newActivities);
+  };
+
+  const onAddActivity = (addedActivity) => {
+      const newActivities = [...activities];
+      newActivities.push(addedActivity)
+      setActivies(newActivities)
+  }
+
   return (
     <div>
       <h2>Update Routine</h2>
@@ -39,11 +60,18 @@ console.log("FEATURED ROUTINE IN UPDATE ROUTINE: ", props.featuredRoutine)
           onChange={(e) => setIsPublic(e.target.checked)}
         />
         <div>
-          Activities: {props.featuredRoutine.activities.map((activity)=> <div key={activity.id}><div>name: {activity.name}</div>
-          <div>count: {activity.count}</div>
-          <div>duration: {activity.duration}</div>
-          <UpdateRoutineActivity routineActivity={activity} onAddRoutine={getRoutines} />
-          </div>)}
+          Activities:{" "}
+          {activities.map((activity) => (
+            <div key={activity.id}>
+              <div>name: {activity.name}</div>
+              <div>count: {activity.count}</div>
+              <div>duration: {activity.duration}</div>
+              <UpdateRoutineActivity
+                routineActivity={activity}
+                onUpdateActivity={onUpdateActivity}
+              />
+            </div>
+          ))}
         </div>
         <button
           onClick={async (e) => {
@@ -53,7 +81,7 @@ console.log("FEATURED ROUTINE IN UPDATE ROUTINE: ", props.featuredRoutine)
               name,
               goal,
               isPublic,
-              props.featuredRoutine.id
+              routine.id
             );
             if (editedRoutine.error) {
               alert(editedRoutine.error);
@@ -77,7 +105,7 @@ console.log("FEATURED ROUTINE IN UPDATE ROUTINE: ", props.featuredRoutine)
           Cancel
         </button>
       </form>
-      <AddActivityToRoutineForm featuredRoutine={props.featuredRoutine}/>
+      <AddActivityToRoutineForm featuredRoutine={routine} onAddActivity={onAddActivity} />
     </div>
   );
 };
