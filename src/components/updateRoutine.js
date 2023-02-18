@@ -4,14 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { AddActivityToRoutineForm, UpdateRoutineActivity } from "./exports";
 
 const UpdateRoutine = (props) => {
-  const [routine, setRoutine] = useState(props.featuredRoutine);
-  const [name, setName] = useState(routine.name);
-  const [goal, setGoal] = useState(routine.goal);
-  const [isPublic, setIsPublic] = useState(routine.isPublic);
-  const [activities, setActivies] = useState(routine.activities);
+  const [name, setName] = useState(props.featuredRoutine.name);
+  const [goal, setGoal] = useState(props.featuredRoutine.goal);
+  const [isPublic, setIsPublic] = useState(props.featuredRoutine.isPublic);
+  const [activities, setActivies] = useState(props.featuredRoutine.activities);
 
   const navigate = useNavigate();
-
   useEffect(() => {}, [activities]);
 
   const onUpdateActivity = (editedActivity) => {
@@ -81,7 +79,7 @@ const UpdateRoutine = (props) => {
               name,
               goal,
               isPublic,
-              routine.id
+              props.featuredRoutine.id
             );
             if (editedRoutine.error) {
               alert(editedRoutine.error);
@@ -105,7 +103,7 @@ const UpdateRoutine = (props) => {
           Cancel
         </button>
       </form>
-      <AddActivityToRoutineForm featuredRoutine={routine} onAddActivity={onAddActivity} />
+      <AddActivityToRoutineForm featuredRoutine={props.featuredRoutine} onAddActivity={onAddActivity} />
     </div>
   );
 };
