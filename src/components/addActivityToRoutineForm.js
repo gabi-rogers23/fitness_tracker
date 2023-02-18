@@ -23,9 +23,11 @@ function AddActivityToRoutineForm(props) {
       duration: duration,
     };
 
+console.log("FEATURED ROUTINE ",props.featuredRoutine)
+
     try {
       const response = await fetch(
-        `${BASE_URL}/routines/${props.featuredRoutine.routineId}/activities`,
+        `${BASE_URL}/routines/${props.featuredRoutine.id}/activities`,
         {
           method: "POST",
           headers: {
@@ -39,10 +41,12 @@ function AddActivityToRoutineForm(props) {
       }
       const data = await response.json();
     setActivitiesToAdd([...activitiesToAdd, data]);
+    
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <div>

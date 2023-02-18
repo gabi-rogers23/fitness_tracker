@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import  { AddActivityToRoutineForm } from "./exports"
 
 const UpdateRoutine = (props) => {
-  console.log(props.featuredRoutine);
+
   const [name, setName] = useState(props.featuredRoutine.name);
   const [goal, setGoal] = useState(props.featuredRoutine.goal);
   const [isPublic, setIsPublic] = useState(props.featuredRoutine.isPublic);
