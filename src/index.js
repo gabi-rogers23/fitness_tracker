@@ -10,6 +10,8 @@ import {
   Routines,
   Register,
   Activities,
+  UpdateRoutineActivity,
+  AddActivityToRoutineForm,
   UpdateActivity,
   UpdateRoutine,
 } from "./components/exports";
@@ -57,6 +59,7 @@ const App = () => {
             path="/routines"
             element={
               <Routines
+                AddActivityToRoutineForm={AddActivityToRoutineForm}
                 isLoggedIn={token}
                 user={username}
                 featuredRoutine={featuredRoutine}
@@ -67,6 +70,10 @@ const App = () => {
           <Route
             path="/updateRoutine"
             element={<UpdateRoutine featuredRoutine={featuredRoutine} />}
+          />
+          <Route
+            path="/updateRoutineActivity"
+            element={<UpdateRoutineActivity />}
           />
           <Route
             path="/activities"

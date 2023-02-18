@@ -23,3 +23,5 @@ export { default as Activities } from "./activities";
 export { default as NewActivitiesForm } from "./newActivitiesForm";
 export { default as UpdateActivity } from "./updateActivity";
 export { default as UpdateRoutine } from "./updateRoutine";
+export { default as UpdateRoutineActivity } from "./updateRoutineActivity";
+export { default as AddActivityToRoutineForm } from "./addActivityToRoutineForm";

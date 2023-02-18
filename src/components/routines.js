@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { BASE_URL, deleteRoutine } from "../api/api";
 import AddRoutineForm from "./addRoutineForm";
 import { useNavigate } from "react-router-dom";
-
+import UpdateRoutineActivity from "./updateRoutineActivity";
 function Routines(props) {
   const [routines, setRoutines] = useState([]);
   const navigate = useNavigate();
@@ -53,6 +53,9 @@ function Routines(props) {
                   <p>{activity.description}</p>
                   <p>{activity.duration}</p>
                   <p>{activity.count}</p>
+                  {props.user === routine.creatorName ? (
+                    <UpdateRoutineActivity routineActivity={activity} />
+                  ) : null}
                 </div>
               );
             })}
