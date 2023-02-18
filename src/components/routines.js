@@ -44,7 +44,7 @@ function Routines(props) {
                   <p>duration {activity.duration}</p>
                   <p>count {activity.count}</p>
                   {props.user === routine.creatorName ? (
-                    <UpdateRoutineActivity routineActivity={activity} />
+                    <UpdateRoutineActivity routineActivity={activity} onAddRoutine={getAllRoutines} />
                   ) : null}
                 </div>
               );
@@ -60,7 +60,7 @@ function Routines(props) {
                   navigate("/updateroutine");
                 }}
               >
-                Edit
+                Edit Routine
               </button>
               <button
                 onClick={(e) => {
@@ -69,7 +69,7 @@ function Routines(props) {
                   deleteRoutine(props.featuredRoutine.id);
                 }}
               >
-                Delete
+                Delete Routine
               </button>
             </>
           ) : null}

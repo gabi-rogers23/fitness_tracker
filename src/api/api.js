@@ -194,3 +194,22 @@ export async function getRoutines() {
     return []
   }
 }
+
+export async function updateRoutineActivity (id, newActivity) {
+  try{
+
+  }catch(error){
+    console.log(error)
+  }
+}
+
+export async function deleteRoutineActivity (routineActivityId) {
+  try{
+    await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`,{
+    method: "DELETE",
+    headers: getHeaders()
+    })
+  }catch(error){
+    console.log(error)
+  }
+}

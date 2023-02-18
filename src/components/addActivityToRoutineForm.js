@@ -41,12 +41,11 @@ console.log("FEATURED ROUTINE ",props.featuredRoutine)
       }
       const data = await response.json();
     setActivitiesToAdd([...activitiesToAdd, data]);
-    
     } catch (error) {
       console.error(error);
     }
   };
-
+  
   return (
     <form onSubmit={handleSubmit}>
       <div>

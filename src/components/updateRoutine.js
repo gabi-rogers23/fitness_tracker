@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { editRoutine } from "../api/api"; // import the API function to edit a routine
+import { editRoutine, getRoutines } from "../api/api"; // import the API function to edit a routine
 import { useNavigate } from "react-router-dom";
-import  { AddActivityToRoutineForm } from "./exports"
+import  { AddActivityToRoutineForm, UpdateRoutineActivity } from "./exports"
 
 const UpdateRoutine = (props) => {
 
@@ -9,7 +9,7 @@ const UpdateRoutine = (props) => {
   const [goal, setGoal] = useState(props.featuredRoutine.goal);
   const [isPublic, setIsPublic] = useState(props.featuredRoutine.isPublic);
   const navigate = useNavigate();
-
+console.log("FEATURED ROUTINE IN UPDATE ROUTINE: ", props.featuredRoutine)
   return (
     <div>
       <h2>Update Routine</h2>
@@ -38,6 +38,13 @@ const UpdateRoutine = (props) => {
           checked={isPublic}
           onChange={(e) => setIsPublic(e.target.checked)}
         />
+        <div>
+          Activities: {props.featuredRoutine.activities.map((activity)=> <div key={activity.id}><div>name: {activity.name}</div>
+          <div>count: {activity.count}</div>
+          <div>duration: {activity.duration}</div>
+          <UpdateRoutineActivity routineActivity={activity} onAddRoutine={getRoutines} />
+          </div>)}
+        </div>
         <button
           onClick={async (e) => {
             e.preventDefault();
