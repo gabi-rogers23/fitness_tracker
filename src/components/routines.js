@@ -1,33 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { BASE_URL, deleteRoutine } from "../api/api";
+import { getRoutines, deleteRoutine } from "../api/api";
 import AddRoutineForm from "./addRoutineForm";
 import { useNavigate } from "react-router-dom";
 import UpdateRoutineActivity from "./updateRoutineActivity";
+
 function Routines(props) {
   const [routines, setRoutines] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchRoutines() {
-      try {
-        const response = await fetch(`${BASE_URL}/routines`);
-        const data = await response.json();
-        setRoutines(data);
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchRoutines();
-  }, []);
-
-  useEffect(() => {}, [routines]);
-
-  const handleAddRoutine = (newRoutine) => {
-    setRoutines([...routines, newRoutine]);
+  const getAllRoutines = () => {
+    getRoutines().then((routines) => {
+      setRoutines(routines);
+      console.log(routines);
+    })
   };
+
+  useEffect(() => { getAllRoutines() }, []);
+  useEffect(() => {}, [routines]);
 
   return (
     <div>
@@ -35,7 +25,7 @@ function Routines(props) {
       {props.isLoggedIn && (
         <AddRoutineForm
           setRoutines={setRoutines}
-          onAddRoutine={handleAddRoutine}
+          onAddRoutine={getAllRoutines}
         />
       )}
       <h1>Routines</h1>
@@ -49,10 +39,10 @@ function Routines(props) {
             {routine.activities.map((activity) => {
               return (
                 <div key={activity.id}>
-                  <h1>{activity.name}</h1>
-                  <p>{activity.description}</p>
-                  <p>{activity.duration}</p>
-                  <p>{activity.count}</p>
+                  <h1>name {activity.name}</h1>
+                  <p>description {activity.description}</p>
+                  <p>duration {activity.duration}</p>
+                  <p>count {activity.count}</p>
                   {props.user === routine.creatorName ? (
                     <UpdateRoutineActivity routineActivity={activity} />
                   ) : null}

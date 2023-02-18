@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { editRoutine } from "../api/api"; // import the API function to edit a routine
 import { useNavigate } from "react-router-dom";
+import  { AddActivityToRoutineForm } from "./exports"
 
 const UpdateRoutine = (props) => {
   console.log(props.featuredRoutine);
@@ -69,6 +70,7 @@ const UpdateRoutine = (props) => {
           Cancel
         </button>
       </form>
+      <AddActivityToRoutineForm featuredRoutine={props.featuredRoutine}/>
     </div>
   );
 };

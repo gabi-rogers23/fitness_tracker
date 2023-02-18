@@ -185,3 +185,12 @@ export async function getUserRoutines(BASE_URL, userName) {
   }
 }
 
+export async function getRoutines() {
+  try {
+    const response = await fetch(`${BASE_URL}/routines`);
+    return await response.json()
+  } catch(error) {
+    console.log(error)
+    return []
+  }
+}

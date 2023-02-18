@@ -1,34 +1,32 @@
+import React from "react";
 import { useState, useEffect } from "react";
-import { BASE_URL } from "../api/api";
+import { getAllActivities, BASE_URL } from "../api/api";
+
+
 function AddActivityToRoutineForm(props) {
   const [activities, setActivities] = useState([]);
+  const [activitiesToAdd, setActivitiesToAdd] = useState([])
+  const [selectedActivityId, setSelectedActivityId] = useState("");
+  const [count, setCount] = useState(0)
+  const [duration, setDuration] = useState(0)
 
   useEffect(() => {
-    async function fetchActivities() {
-      try {
-        const response = await fetch(`${BASE_URL}/activities`);
-        const data = await response.json();
-        setActivities(data);
-        console.log(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    fetchActivities();
+   const allActivities = getAllActivities()
+   setActivities(allActivities);
   }, []);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const newActivity = {
-      activityId: props.selectedActivityId,
-      count: props.count,
-      duration: props.duration,
+      activityId: selectedActivityId,
+      count: count,
+      duration: duration,
     };
 
     try {
       const response = await fetch(
-        `${BASE_URL}/routines/${props.routineId}/activities`,
+        `${BASE_URL}/routines/${props.featuredRoutine.routineId}/activities`,
         {
           method: "POST",
           headers: {
@@ -41,7 +39,7 @@ function AddActivityToRoutineForm(props) {
         throw new Error("Failed to add activity to routine");
       }
       const data = await response.json();
-      props.setActivitiesToAdd([...props.activitiesToAdd, data]);
+    setActivitiesToAdd([...activitiesToAdd, data]);
     } catch (error) {
       console.error(error);
     }
@@ -53,8 +51,8 @@ function AddActivityToRoutineForm(props) {
         <select
           name="activity"
           id="activity"
-          value={props.selectedActivityId}
-          onChange={(event) => props.setSelectedActivityId(event.target.value)}
+          value={selectedActivityId}
+          onChange={(event) => setSelectedActivityId(event.target.value)}
         >
           <option value="">Select an activity...</option>
           {activities.map((activity) => (
@@ -70,8 +68,8 @@ function AddActivityToRoutineForm(props) {
           type="number"
           id="count"
           name="count"
-          value={props.count}
-          onChange={(event) => props.setCount(event.target.value)}
+          value={count}
+          onChange={(event) => setCount(event.target.value)}
         />
       </div>
       <div>
@@ -80,8 +78,8 @@ function AddActivityToRoutineForm(props) {
           type="number"
           id="duration"
           name="duration"
-          value={props.duration}
-          onChange={(event) => props.setDuration(event.target.value)}
+          value={duration}
+          onChange={(event) => setDuration(event.target.value)}
         />
       </div>
       <button type="submit">Add Activity</button>

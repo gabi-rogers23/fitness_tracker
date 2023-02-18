@@ -1,16 +1,10 @@
 import { useState } from "react";
 import { getHeaders, BASE_URL } from "../api/api";
-import AddActivityToRoutineForm from "./addActivityToRoutineForm";
 
-function AddRoutineForm({ onAddRoutine, setRoutines }) {
+function AddRoutineForm({ onAddRoutine }) {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
-  const [activitiesToAdd, setActivitiesToAdd] = useState([]);
-  const [selectedActivityId, setSelectedActivityId] = useState("");
-  const [count, setCount] = useState(1);
-  const [duration, setDuration] = useState(0);
-  const [routData, setRoutData] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,29 +17,10 @@ function AddRoutineForm({ onAddRoutine, setRoutines }) {
         body: JSON.stringify({ name: name, goal: goal, isPublic: isPublic }),
       });
       console.log(response);
-      const res = await fetch(`${BASE_URL}/routines`);
-      const routs = await res.json();
-      const routData = await response.json();
-
-      setRoutData(routData);
-      setRoutines(routs);
-
-      const resp = await fetch(
-        `${BASE_URL}/routines/${routData.id}/activities`,
-        {
-          method: "POST",
-          headers: getHeaders(),
-          body: JSON.stringify({
-            activityId: selectedActivityId,
-            count: count,
-            duration: duration,
-          }),
-        }
-      );
-      const addActRout = await resp.json();
-      // onAddActivityToRoutine(addActRout);
-
-      return { addActRout };
+      setName("")
+      setGoal("")
+      setIsPublic(false)
+      onAddRoutine()
     } catch (error) {
       console.error(error);
     }
@@ -82,18 +57,6 @@ function AddRoutineForm({ onAddRoutine, setRoutines }) {
         <br />
         <button type="submit">Add Routine</button>
       </form>
-
-      <AddActivityToRoutineForm
-        activitiesToAdd={activitiesToAdd}
-        setActivitiesToAdd={setActivitiesToAdd}
-        count={count}
-        setCount={setCount}
-        duration={duration}
-        setDuration={setDuration}
-        selectedActivityId={selectedActivityId}
-        setSelectedActivityId={setSelectedActivityId}
-        routData={routData}
-      />
     </div>
   );
 }
