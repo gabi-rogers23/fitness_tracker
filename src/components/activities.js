@@ -21,8 +21,8 @@ const Activities = (props) => {
   }, []);
 
   return (
-    <div>
-      {props.isLoggedIn && (
+    <div className="tabContainer">
+      {localStorage.getItem('auth_token') && (
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -43,13 +43,11 @@ const Activities = (props) => {
       <div>
         {allActivities.map((activity) => {
           return (
-            <div key={activity.id}>
-              NAME: {activity.name}
-              <br />
-              DESCIPTION: {activity.description}
-              <br />
-              {props.isLoggedIn && (
-                <button
+            <div className="activity" key={activity.id}>
+              <div><b>Name:</b> {activity.name}</div>
+              <div> <b>Description:</b> {activity.description}</div>
+              {localStorage.getItem('auth_token') && (
+                <button className="edit"
                   onClick={(e) => {
                     e.preventDefault();
                     console.log(activity);
@@ -60,7 +58,6 @@ const Activities = (props) => {
                   Edit
                 </button>
               )}
-              <p />
             </div>
           );
         })}

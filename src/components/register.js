@@ -7,12 +7,14 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   return (
-    <div>
-      <div>Create an Account!</div>
+    <div className="tabContainer">
+      <div className="createAccount">Create an Account!</div>
+      <p />
       <form>
         <div>Enter your username and password to create an account!</div>
         <br />
-        <div>
+        <br />
+        <div className="registerForm">
           USERNAME:
           <input
             required
@@ -22,9 +24,7 @@ const Register = (props) => {
               setUsername(event.target.value);
             }}
           ></input>
-        </div>
-        <br />
-        <div>
+          <br />
           PASSWORD:
           <input
             required
@@ -34,26 +34,25 @@ const Register = (props) => {
               setPassword(event.target.value);
             }}
           ></input>
+          <br />
+          <button
+            onClick={async (event) => {
+              event.preventDefault();
+              const newUser = await registerNewUser(username, password);
+              console.log("NEW USER MESSAGE" + newUser.message);
+              if (newUser.error) {
+                alert(newUser.message);
+              } else {
+                props.storeUser(username, newUser.token);
+              }
+            }}
+          >
+            Enter
+          </button>
         </div>
-        <br />
-        <button
-          onClick={async (event) => {
-            event.preventDefault();
-            const newUser = await registerNewUser(username, password);
-            console.log("NEW USER MESSAGE" + newUser.message);
-            if (newUser.error) {
-              alert(newUser.message);
-            } else {
-              props.storeUser(username, newUser.token);
-              
-            }
-          }}
-        >
-          Enter
-        </button>
       </form>
-      <div>
-        Already a user? <p />
+      <div className="formQ">
+        Already a user? <br />
         <button
           onClick={(event) => {
             event.preventDefault();
