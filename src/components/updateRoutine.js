@@ -122,8 +122,8 @@ const UpdateRoutine = (props) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            navigate("/routines");
-            props.setFeaturedRoutine("");
+            navigate(-1);
+            sessionStorage.setItem("FEATURED_ROUTINE", null);
           }}
         >
           Cancel
