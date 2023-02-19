@@ -26,7 +26,6 @@ function Routines(props) {
       {props.user}
       {props.isLoggedIn && (
         <AddRoutineForm
-          setRoutines={setRoutines}
           onAddRoutine={getAllRoutines}
         />
       )}
@@ -62,7 +61,7 @@ function Routines(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   console.log(routine);
-                  props.setFeaturedRoutine(routine);
+                  sessionStorage.setItem("FEATURED_ROUTINE", routine.id);
                   navigate("/updateroutine");
                 }}
               >

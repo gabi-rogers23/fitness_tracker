@@ -1,39 +1,52 @@
 import React, { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-import { BASE_URL, getUserRoutines, getUserProfile } from "../api/api";
+import { useNavigate } from "react-router-dom";
+import {
+  BASE_URL,
+  getUserRoutines,
+  getUserProfile,
+  deleteRoutine,
+} from "../api/api";
+import { AddRoutineForm } from "./exports";
 
-const Profile = ({ setOnline }) => {
+const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userRoutines, setUserRoutines] = useState([]);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const currentToken = localStorage.getItem("auth_token");
 
   useEffect(() => {
-    const isLoggedIn = async () => {
-      try {
-        const userProfile = await getUserProfile(BASE_URL, currentToken);
+    setLoading(true)
+    getUserProfile(BASE_URL, currentToken)
+      .then((userProfile) => {
         setProfile(userProfile);
-        const userRoutines = await getUserRoutines(
-          BASE_URL,
-          userProfile?.username
-        );
-        setUserRoutines(userRoutines);
-      } catch (error) {
+        updateUserRoutines(userProfile);
+      })
+      .catch((error) => {
         console.error(error);
-      } finally {
+      })
+      .finally(() => {
         setLoading(false);
-      }
-    };
-
-    isLoggedIn();
+      });
   }, [currentToken]);
 
   // const logout = () => {
   //   setOnline(false);
   //   navigate('/');
   // };
+
+  const onDeleteRoutine = (removedRoutine) => {
+    setUserRoutines(
+      userRoutines.filter((routine) => routine.id !== removedRoutine.id)
+    );
+  };
+
+  const updateUserRoutines = (userProfile) => {
+    getUserRoutines(BASE_URL, userProfile.username).then((userRoutines) => {
+      setUserRoutines(userRoutines);
+    });
+  };
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -47,7 +60,7 @@ const Profile = ({ setOnline }) => {
     <div className="profile-container">
       <div>
         <h1>MY ROUTINES</h1>
-
+        <AddRoutineForm onAddRoutine={() => { updateUserRoutines(profile) }} />
         {userRoutines &&
           userRoutines?.map((routine, index) => (
             <div key={routine.id} className="profile-my-routine">
@@ -63,6 +76,26 @@ const Profile = ({ setOnline }) => {
                   </div>
                 ))}
               </ul>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log("ROUTINE ID", routine.id);
+                  sessionStorage.setItem("FEATURED_ROUTINE", routine.id);
+                  navigate("/updateRoutine");
+                }}
+              >
+                Edit Routine
+              </button>
+              <button
+                className="delete-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  deleteRoutine(routine.id);
+                  onDeleteRoutine(routine);
+                }}
+              >
+                Delete
+              </button>
               <hr />
             </div>
           ))}

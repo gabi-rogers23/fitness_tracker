@@ -20,12 +20,10 @@ const App = () => {
   //Login State
   const [token, setToken] = useState(localStorage.getItem("auth_token"));
   const [featuredActivity, setFeaturedActivity] = useState({});
-  // console.log(isLoggedIn)
-  const navigate = useNavigate();
   const [username, setUsername] = useState(localStorage.getItem("username"));
-  const [password, setPassword] = useState("");
   const [featuredRoutine, setFeaturedRoutine] = useState({});
-
+  const navigate = useNavigate();
+  
   const storeUser = (username, token) => {
     localStorage.setItem("auth_token", token);
     localStorage.setItem("username", username);
@@ -45,14 +43,7 @@ const App = () => {
           <Route
             path="/profile"
             element={
-              <Profile
-                username={username}
-                setUsername={setUsername}
-                password={password}
-                setPassword={setPassword}
-                isLoggedIn={token}
-                setIsLoggedIn={setToken}
-              />
+              <Profile />
             }
           />
           <Route

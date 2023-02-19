@@ -3,7 +3,7 @@ import { editRoutine, getRoutineById } from "../api/api"; // import the API func
 import { useNavigate } from "react-router-dom";
 import { AddActivityToRoutineForm, UpdateRoutineActivity } from "./exports";
 
-const UpdateRoutine = (props) => {
+const UpdateRoutine = () => {
   const [routine, setRoutine] = useState({});
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
@@ -12,14 +12,10 @@ const UpdateRoutine = (props) => {
 
   const navigate = useNavigate();
 
+  
   useEffect(() => {
-    const id =
-      props.featuredRoutine.id != null
-        ? props.featuredRoutine.id
-        : sessionStorage.getItem("FEATURED_ROUTINE");
-    console.log(id);
+    const id = parseInt(sessionStorage.getItem("FEATURED_ROUTINE"))
 
-    sessionStorage.setItem("FEATURED_ROUTINE", id);
     getRoutineById(id).then((refreshedRoutine) => {
       console.log(refreshedRoutine);
       setRoutine(refreshedRoutine);
@@ -87,7 +83,7 @@ const UpdateRoutine = (props) => {
           onChange={(e) => setIsPublic(e.target.checked)}
         />
         <div>
-          Activities:{" "}
+          Activities:
           {activities.map((activity) => (
             <div key={activity.id}>
               <div>name: {activity.name}</div>
