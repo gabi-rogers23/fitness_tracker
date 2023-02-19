@@ -188,39 +188,40 @@ export async function getUserRoutines(BASE_URL, userName) {
 export async function getRoutines() {
   try {
     const response = await fetch(`${BASE_URL}/routines`);
-    return await response.json()
-  } catch(error) {
-    console.log(error)
-    return []
+    return await response.json();
+  } catch (error) {
+    console.log(error);
+    return [];
   }
 }
 
-export async function updateRoutineActivity (id, newActivity) {
-  try{
-
-  }catch(error){
-    console.log(error)
+export async function updateRoutineActivity(id, newActivity) {
+  try {
+  } catch (error) {
+    console.log(error);
   }
 }
 
-export async function deleteRoutineActivity (routineActivityId) {
-  try{
-    await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`,{
-    method: "DELETE",
-    headers: getHeaders()
-    })
-  }catch(error){
-    console.log(error)
+export async function deleteRoutineActivity(routineActivityId) {
+  try {
+    await fetch(`${BASE_URL}/routine_activities/${routineActivityId}`, {
+      method: "DELETE",
+      headers: getHeaders(),
+    });
+  } catch (error) {
+    console.log(error);
   }
 }
 
 export async function getRoutineById(routineId) {
   try {
     const routines = await getRoutines();
-    const [expectedRoutine] = routines.filter((routine) => routine.id == routineId)
-    return expectedRoutine
-  } catch(error) {
-    console.log(error)
+    const [expectedRoutine] = routines.filter(
+      (routine) => routine.id === routineId
+    );
+    return expectedRoutine;
+  } catch (error) {
+    console.log(error);
     return {};
   }
 }

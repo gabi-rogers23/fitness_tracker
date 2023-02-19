@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BASE_URL, deleteRoutineActivity, getHeaders } from "../api/api";
 
-function UpdateRoutineActivity({ routineActivity, onUpdateActivity, onRemovedActivity }) {
+function UpdateRoutineActivity({
+  routineActivity,
+  onUpdateActivity,
+  onRemovedActivity,
+}) {
   const [count, setCount] = useState(routineActivity.count);
   const [duration, setDuration] = useState(routineActivity.duration);
 
@@ -15,7 +19,7 @@ function UpdateRoutineActivity({ routineActivity, onUpdateActivity, onRemovedAct
 
   const handleUpdate = async (e) => {
     try {
-      e.preventDefault()
+      e.preventDefault();
 
       // await onAddRoutine()
 
@@ -24,11 +28,11 @@ function UpdateRoutineActivity({ routineActivity, onUpdateActivity, onRemovedAct
         {
           method: "PATCH",
           body: JSON.stringify({ count: count, duration: duration }),
-          headers: getHeaders()
+          headers: getHeaders(),
         }
       );
       const data = await response.json();
-      onUpdateActivity(data)
+      onUpdateActivity(data);
       console.log(data);
     } catch (error) {
       console.error(error);
@@ -40,11 +44,15 @@ function UpdateRoutineActivity({ routineActivity, onUpdateActivity, onRemovedAct
       <input type="number" value={count} onChange={handleCountChange} />
       <input type="number" value={duration} onChange={handleDurationChange} />
       <button onClick={handleUpdate}>Update Activity</button>
-      <button onClick={(async (e)=>{
-        e.preventDefault();
-        await deleteRoutineActivity(routineActivity.routineActivityId)
-        onRemovedActivity(routineActivity)
-      })}>Delete Activity</button>
+      <button
+        onClick={async (e) => {
+          e.preventDefault();
+          await deleteRoutineActivity(routineActivity.routineActivityId);
+          onRemovedActivity(routineActivity);
+        }}
+      >
+        Delete Activity
+      </button>
     </div>
   );
 }

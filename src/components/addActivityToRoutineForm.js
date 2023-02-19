@@ -40,19 +40,22 @@ function AddActivityToRoutineForm(props) {
       const data = await response.json();
       data.routineActivityId = data.id;
       props.onAddActivity(data);
-      setCount(0)
-      setDuration(0)
-      setSelectedActivityId("")
+      setCount(0);
+      setDuration(0);
+      setSelectedActivityId("");
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="formU" onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="activity">Activity:</label>
+        <label className="labelU" htmlFor="activity">
+          Activity:
+        </label>
         <select
+          className="selectU"
           name="activity"
           id="activity"
           value={selectedActivityId}
@@ -67,7 +70,9 @@ function AddActivityToRoutineForm(props) {
         </select>
       </div>
       <div>
-        <label htmlFor="count">Count:</label>
+        <label className="labelU" htmlFor="count">
+          Count:
+        </label>
         <input
           type="number"
           id="count"
@@ -77,7 +82,9 @@ function AddActivityToRoutineForm(props) {
         />
       </div>
       <div>
-        <label htmlFor="duration">Duration (in minutes):</label>
+        <label className="labelU" htmlFor="duration">
+          Duration (in minutes):
+        </label>
         <input
           type="number"
           id="duration"
@@ -86,7 +93,9 @@ function AddActivityToRoutineForm(props) {
           onChange={(event) => setDuration(event.target.value)}
         />
       </div>
-      <button type="submit">Add Activity</button>
+      <button className="buttonU" type="submit">
+        Add Activity
+      </button>
     </form>
   );
 }

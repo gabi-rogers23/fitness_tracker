@@ -17,45 +17,50 @@ function AddRoutineForm({ onAddRoutine }) {
         body: JSON.stringify({ name: name, goal: goal, isPublic: isPublic }),
       });
       console.log(response);
-      setName("")
-      setGoal("")
-      setIsPublic(false)
-      onAddRoutine()
+      setName("");
+      setGoal("");
+      setIsPublic(false);
+      onAddRoutine();
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <form className="formAdd" onSubmit={handleSubmit}>
+        <label className="label">
           Name:
           <input
+            className="input"
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
           />
         </label>
         <br />
-        <label>
+        <label className="label">
           Goal:
           <input
+            className="input"
             type="text"
             value={goal}
             onChange={(event) => setGoal(event.target.value)}
           />
         </label>
         <br />
-        <label>
+        <label className="label">
           Public:
           <input
+            className="input"
             type="checkbox"
             checked={isPublic}
             onChange={(event) => setIsPublic(event.target.checked)}
           />
         </label>
         <br />
-        <button type="submit">Add Routine</button>
+        <button className="buttonAdd" type="submit">
+          Add Routine
+        </button>
       </form>
     </div>
   );

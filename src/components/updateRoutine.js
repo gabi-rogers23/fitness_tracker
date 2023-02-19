@@ -13,20 +13,21 @@ const UpdateRoutine = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const id = props.featuredRoutine.id != null
-    ? props.featuredRoutine.id
-    : sessionStorage.getItem("FEATURED_ROUTINE")
-    console.log(id)
+    const id =
+      props.featuredRoutine.id != null
+        ? props.featuredRoutine.id
+        : sessionStorage.getItem("FEATURED_ROUTINE");
+    console.log(id);
 
     sessionStorage.setItem("FEATURED_ROUTINE", id);
     getRoutineById(id).then((refreshedRoutine) => {
-      console.log(refreshedRoutine)
-      setRoutine(refreshedRoutine)
-      setName(refreshedRoutine.name)
-      setGoal(refreshedRoutine.goal)
-      setIsPublic(refreshedRoutine.isPublic)
-      setActivities(refreshedRoutine.activities) 
-    })
+      console.log(refreshedRoutine);
+      setRoutine(refreshedRoutine);
+      setName(refreshedRoutine.name);
+      setGoal(refreshedRoutine.goal);
+      setIsPublic(refreshedRoutine.isPublic);
+      setActivities(refreshedRoutine.activities);
+    });
   }, []);
 
   useEffect(() => {}, [activities]);
@@ -57,9 +58,10 @@ const UpdateRoutine = (props) => {
   return (
     <div>
       <h2>Update Routine</h2>
-      <form>
+      <form className="formAdd">
         Name:
         <input
+          className="input"
           required
           value={name}
           onChange={(e) => {
@@ -69,6 +71,7 @@ const UpdateRoutine = (props) => {
         ></input>
         Goal:
         <input
+          className="input"
           required
           value={goal}
           onChange={(e) => {
@@ -78,6 +81,7 @@ const UpdateRoutine = (props) => {
         ></input>
         Is Public:
         <input
+          className="input"
           type="checkbox"
           checked={isPublic}
           onChange={(e) => setIsPublic(e.target.checked)}
@@ -98,6 +102,7 @@ const UpdateRoutine = (props) => {
           ))}
         </div>
         <button
+          className="buttonAdd"
           onClick={async (e) => {
             e.preventDefault();
             console.log(name, goal, isPublic);
@@ -120,6 +125,7 @@ const UpdateRoutine = (props) => {
           Enter
         </button>
         <button
+          className="buttonAdd"
           onClick={(e) => {
             e.preventDefault();
             navigate(-1);

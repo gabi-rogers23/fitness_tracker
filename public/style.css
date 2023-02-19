@@ -188,3 +188,141 @@ button:focus {
   justify-content: space-evenly;
   width: 400px;
 }
+
+/* Set a fixed width for the routine container */
+.routine {
+  width: 500px;
+  margin: 20px auto;
+  border: 2px solid #ccc;
+  padding: 20px;
+}
+
+/* Style the routine name */
+.routine h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Style the routine creator name */
+.routine h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+/* Style the routine goal */
+.routine p {
+  margin-bottom: 10px;
+}
+
+/* Style the activity container */
+.activityStyle {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Style the activity name */
+.activityStyle h1 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+/* Style the activity description, duration, and count */
+.activityStyle p {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+/* Style the edit routine and delete routine buttons */
+.routine button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.routine button:hover {
+  background-color: #3e8e41;
+}
+/* Add Routine form  */
+.formAdd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.input[type="text"],
+.input[type="checkbox"] {
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.buttonAdd[type="submit"] {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.buttonAdd[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+/* Update Routine Activity */
+.formU {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.labelU {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.selectU,
+input[type="number"] {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  width: 100%;
+  max-width: 20rem;
+  margin-bottom: 1rem;
+}
+
+.buttonU [type="submit"] {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  background-color: #0077ff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.buttonU [type="submit"]:hover {
+  background-color: #0066cc;
+}
