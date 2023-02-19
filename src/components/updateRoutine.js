@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { editRoutine, getRoutines } from "../api/api"; // import the API function to edit a routine
+import { editRoutine, getRoutineById } from "../api/api"; // import the API function to edit a routine
 import { useNavigate } from "react-router-dom";
 import { AddActivityToRoutineForm, UpdateRoutineActivity } from "./exports";
 
 const UpdateRoutine = (props) => {
-  const [name, setName] = useState(props.featuredRoutine.name);
-  const [goal, setGoal] = useState(props.featuredRoutine.goal);
-  const [isPublic, setIsPublic] = useState(props.featuredRoutine.isPublic);
-  const [activities, setActivities] = useState(props.featuredRoutine.activities);
+  const [routine, setRoutine] = useState({});
+  const [name, setName] = useState("");
+  const [goal, setGoal] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
+  const [activities, setActivities] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const id = props.featuredRoutine.id != null
+    ? props.featuredRoutine.id
+    : sessionStorage.getItem("FEATURED_ROUTINE")
+    console.log(id)
+
+    sessionStorage.setItem("FEATURED_ROUTINE", id);
+    getRoutineById(id).then((refreshedRoutine) => {
+      console.log(refreshedRoutine)
+      setRoutine(refreshedRoutine)
+      setName(refreshedRoutine.name)
+      setGoal(refreshedRoutine.goal)
+      setIsPublic(refreshedRoutine.isPublic)
+      setActivities(refreshedRoutine.activities) 
+    })
+  }, []);
+
   useEffect(() => {}, [activities]);
 
   const onUpdateActivity = (editedActivity) => {
@@ -24,13 +43,15 @@ const UpdateRoutine = (props) => {
   };
 
   const onAddActivity = (addedActivity) => {
-      const newActivities = [...activities];
-      newActivities.push(addedActivity)
-      setActivities(newActivities)
-  }
+    const newActivities = [...activities];
+    newActivities.push(addedActivity);
+    setActivities(newActivities);
+  };
 
   const onRemovedActivity = (removedActivity) => {
-    setActivities(activities.filter((activity) => activity.id !== removedActivity.id))
+    setActivities(
+      activities.filter((activity) => activity.id !== removedActivity.id)
+    );
   };
 
   return (
@@ -84,7 +105,7 @@ const UpdateRoutine = (props) => {
               name,
               goal,
               isPublic,
-              props.featuredRoutine.id
+              routine.id
             );
             if (editedRoutine.error) {
               alert(editedRoutine.error);
@@ -108,7 +129,10 @@ const UpdateRoutine = (props) => {
           Cancel
         </button>
       </form>
-      <AddActivityToRoutineForm featuredRoutine={props.featuredRoutine} onAddActivity={onAddActivity} />
+      <AddActivityToRoutineForm
+        featuredRoutine={routine}
+        onAddActivity={onAddActivity}
+      />
     </div>
   );
 };

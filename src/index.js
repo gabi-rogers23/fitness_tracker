@@ -24,7 +24,7 @@ const App = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState(localStorage.getItem("username"));
   const [password, setPassword] = useState("");
-  const [featuredRoutine, setFeaturedRoutine] = useState([]);
+  const [featuredRoutine, setFeaturedRoutine] = useState({});
 
   const storeUser = (username, token) => {
     localStorage.setItem("auth_token", token);

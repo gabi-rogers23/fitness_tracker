@@ -213,3 +213,14 @@ export async function deleteRoutineActivity (routineActivityId) {
     console.log(error)
   }
 }
+
+export async function getRoutineById(routineId) {
+  try {
+    const routines = await getRoutines();
+    const [expectedRoutine] = routines.filter((routine) => routine.id == routineId)
+    return expectedRoutine
+  } catch(error) {
+    console.log(error)
+    return {};
+  }
+}

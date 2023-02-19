@@ -38,6 +38,7 @@ function AddActivityToRoutineForm(props) {
         throw new Error("Failed to add activity to routine");
       }
       const data = await response.json();
+      data.routineActivityId = data.id;
       props.onAddActivity(data);
       setCount(0)
       setDuration(0)
