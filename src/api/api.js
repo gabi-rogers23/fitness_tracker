@@ -174,7 +174,7 @@ export async function deleteRoutine(id) {
   }
 }
 
-export async function getUserRoutines(BASE_URL, userName) {
+export async function getUserRoutines(userName) {
   try {
     const res = await fetch(`${BASE_URL}/users/${userName}/routines`, 
     {headers: getHeaders()});
@@ -188,7 +188,7 @@ export async function getUserRoutines(BASE_URL, userName) {
 
 export async function getRoutines() {
   try {
-    const response = await fetch(`${BASE_URL}/routines`);
+    const response = await fetch(`${BASE_URL}/routines`, { headers: getHeaders() });
     return await response.json();
   } catch (error) {
     console.log(error);
@@ -214,11 +214,11 @@ export async function deleteRoutineActivity(routineActivityId) {
   }
 }
 
-export async function getRoutineById(routineId) {
+export async function getUserRoutine(routineToRefresh) {
   try {
-    const routines = await getRoutines();
+    const routines = await getUserRoutines(routineToRefresh.creatorName); 
     const [expectedRoutine] = routines.filter(
-      (routine) => routine.id === routineId
+      (routine) => routine.id === routineToRefresh.id
     );
     return expectedRoutine;
   } catch (error) {

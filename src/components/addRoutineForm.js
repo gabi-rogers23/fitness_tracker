@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getHeaders, BASE_URL } from "../api/api";
 
-function AddRoutineForm({ onAddRoutine }) {
+function AddRoutineForm({ onAddRoutine, setButtonClick }) {
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("");
   const [isPublic, setIsPublic] = useState(false);
@@ -20,6 +20,7 @@ function AddRoutineForm({ onAddRoutine }) {
       setName("");
       setGoal("");
       setIsPublic(false);
+      setButtonClick(false);
       onAddRoutine();
     } catch (error) {
       console.error(error);
@@ -61,6 +62,10 @@ function AddRoutineForm({ onAddRoutine }) {
         <button className="buttonAdd" type="submit">
           Add Routine
         </button>
+        <button onClick={((e)=>{
+          e.preventDefault()
+          setButtonClick(false)
+        })}>Cancel</button>
       </form>
     </div>
   );

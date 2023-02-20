@@ -179,7 +179,6 @@ button:focus {
   border: 2px solid #ccc;
   border-radius: 3px;
   padding: 20px;
-  
 }
 
 /* Style the routine name */
@@ -238,6 +237,7 @@ button:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 3px;
@@ -323,4 +323,8 @@ input[type="number"] {
 
 .buttonU [type="submit"]:hover {
   background-color: black;
+}
+
+.updateRoutineActivity {
+  border-bottom: 1px solid black;
 }

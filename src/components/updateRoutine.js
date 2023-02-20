@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { editRoutine, getRoutineById } from "../api/api"; // import the API function to edit a routine
+import { editRoutine, getUserRoutine } from "../api/api"; // import the API function to edit a routine
 import { useNavigate } from "react-router-dom";
 import { AddActivityToRoutineForm, UpdateRoutineActivity } from "./exports";
 
@@ -12,11 +12,10 @@ const UpdateRoutine = () => {
 
   const navigate = useNavigate();
 
-  
   useEffect(() => {
-    const id = parseInt(sessionStorage.getItem("FEATURED_ROUTINE"))
-
-    getRoutineById(id).then((refreshedRoutine) => {
+    const routine = JSON.parse(sessionStorage.getItem("FEATURED_ROUTINE"));
+    console.log("ID FROM SESSION STORAGE: ", routine);
+    getUserRoutine(routine).then((refreshedRoutine) => {
       console.log(refreshedRoutine);
       setRoutine(refreshedRoutine);
       setName(refreshedRoutine.name);
@@ -33,6 +32,7 @@ const UpdateRoutine = () => {
     const location = newActivities.findIndex(
       (activity) => activity.id === editedActivity.activityId
     );
+    console.log(newActivities);
     const activityToUpdate = newActivities[location];
     activityToUpdate.count = editedActivity.count;
     activityToUpdate.duration = editedActivity.duration;
@@ -41,6 +41,7 @@ const UpdateRoutine = () => {
 
   const onAddActivity = (addedActivity) => {
     const newActivities = [...activities];
+    addedActivity.id = addedActivity.activityId;
     newActivities.push(addedActivity);
     setActivities(newActivities);
   };
@@ -52,10 +53,10 @@ const UpdateRoutine = () => {
   };
 
   return (
-    <div>
+    <div className="tabContainer">
       <h2>Update Routine</h2>
       <form className="formAdd">
-        Name:
+       <div> Name: 
         <input
           className="input"
           required
@@ -64,8 +65,8 @@ const UpdateRoutine = () => {
             e.preventDefault();
             setName(e.target.value);
           }}
-        ></input>
-        Goal:
+        ></input></div><br/>
+        <div>Goal:
         <input
           className="input"
           required
@@ -74,18 +75,19 @@ const UpdateRoutine = () => {
             e.preventDefault();
             setGoal(e.target.value);
           }}
-        ></input>
-        Is Public:
+        ></input></div><br/>
+        <div> Is Public:
         <input
           className="input"
           type="checkbox"
           checked={isPublic}
           onChange={(e) => setIsPublic(e.target.checked)}
-        />
+        /></div><br/>
         <div>
-          Activities:
+         <h3>Activities:</h3>
           {activities.map((activity) => (
             <div key={activity.id}>
+              <p/>
               <div>Name: {activity.name}</div>
               <div>Count: {activity.count}</div>
               <div>Duration: {activity.duration}</div>

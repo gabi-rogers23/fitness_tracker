@@ -7,6 +7,7 @@ import UpdateRoutineActivity from "./updateRoutineActivity";
 
 function Routines(props) {
   const [routines, setRoutines] = useState([]);
+  const [buttonClick, setButtonClick] = useState(false);
   const navigate = useNavigate();
 
   const getAllRoutines = () => {
@@ -24,11 +25,19 @@ function Routines(props) {
   return (
     <div className="tabContainer">
       <h1>ROUTINES</h1>
-      {props.isLoggedIn && (
-        <AddRoutineForm
-          onAddRoutine={getAllRoutines}
-        />
+      {props.isLoggedIn && !buttonClick && (
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setButtonClick(true);
+          }}
+        >
+          Add Routine
+        </button>
       )}
+
+      {buttonClick && <AddRoutineForm onAddRoutine={getAllRoutines} setButtonClick={setButtonClick}/>}
+
       {routines.map((routine) => (
         <div className="routine" key={routine.id}>
           <h1 className="routine-name">{routine.name}</h1>
@@ -60,7 +69,7 @@ function Routines(props) {
                 onClick={(e) => {
                   e.preventDefault();
                   console.log(routine);
-                  sessionStorage.setItem("FEATURED_ROUTINE", routine.id);
+                  sessionStorage.setItem("FEATURED_ROUTINE", JSON.stringify(routine));
                   navigate("/updateroutine");
                 }}
               >

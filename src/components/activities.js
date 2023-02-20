@@ -23,7 +23,7 @@ const Activities = (props) => {
   return (
     <div className="tabContainer">
       <h1>ACTIVITIES</h1>
-      {localStorage.getItem('auth_token') && (
+      {localStorage.getItem('auth_token') && !buttonClick && (
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -45,13 +45,13 @@ const Activities = (props) => {
         {allActivities.map((activity) => {
           return (
             <div className="activity" key={activity.id}>
-              <div><h4>Name:</h4> {activity.name}</div>
-              <div> <h4>Description:</h4> {activity.description}</div>
+              <div><b>Name:</b> {activity.name}</div><br/>
+              <div> <b>Description:</b> {activity.description}</div><br/>
               {localStorage.getItem('auth_token') && (
                 <button className="edit"
                   onClick={(e) => {
                     e.preventDefault();
-                    console.log(activity);
+                    // console.log(activity);
                     props.setFeaturedActivity(activity);
                     navigate("/updateactivity");
                   }}

@@ -37,7 +37,7 @@ const Profile = () => {
   };
 
   const updateUserRoutines = (userProfile) => {
-    getUserRoutines(BASE_URL, userProfile.username).then((userRoutines) => {
+    getUserRoutines(userProfile.username).then((userRoutines) => {
       setUserRoutines(userRoutines);
     });
   };
@@ -69,7 +69,7 @@ const Profile = () => {
                 onClick={(e) => {
                   e.preventDefault();
                   console.log("ROUTINE ID", routine.id);
-                  sessionStorage.setItem("FEATURED_ROUTINE", routine.id);
+                  sessionStorage.setItem("FEATURED_ROUTINE", JSON.stringify(routine));
                   navigate("/updateRoutine");
                 }}
               >

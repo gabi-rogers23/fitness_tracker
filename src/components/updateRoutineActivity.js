@@ -40,9 +40,9 @@ function UpdateRoutineActivity({
   };
 
   return (
-    <div>
+    <div className="updateRoutineActivity">
       <input type="number" value={count} onChange={handleCountChange} />
-      <input type="number" value={duration} onChange={handleDurationChange} />
+      <input type="number" value={duration} onChange={handleDurationChange} /><br/>
       <button onClick={handleUpdate}>Update Activity</button>
       <button
         onClick={async (e) => {
@@ -52,7 +52,7 @@ function UpdateRoutineActivity({
         }}
       >
         Delete Activity
-      </button>
+      </button><p/>
     </div>
   );
 }
