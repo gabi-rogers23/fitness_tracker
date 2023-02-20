@@ -25,7 +25,7 @@ body {
   width: 1200px;
   height: 1000px;
   display: flex;
-  flex-direction: row;
+  flex-direction: c;
   justify-content: center;
 }
 
@@ -48,7 +48,7 @@ button:focus {
   background: darkgray;
 }
 
-.tabContainer {
+.tabContainer, .profile-container {
   display: flex;
   flex-direction: column;
   margin-top: 25px;
@@ -241,7 +241,19 @@ button:focus {
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 3px;
-  width: 300px;
+  width: 600px;
+  margin: 0 auto;
+  text-align:center;
+}
+
+.newActivityForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  width: 600px;
   margin: 0 auto;
   text-align:center;
 }

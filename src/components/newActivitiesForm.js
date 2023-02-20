@@ -7,8 +7,8 @@ const NewActivitiesForm = (props) => {
   const [description, setDescription] = useState("");
   
   return (
-    <div>
-      <h2>New Activity</h2>
+    <div className="newActivityForm">
+      <h2>NEW ACTIVITY</h2>
       <form>
         Name:
         <input
@@ -18,7 +18,7 @@ const NewActivitiesForm = (props) => {
             e.preventDefault();
             setName(e.target.value);
           }}
-        ></input>
+        ></input> 
         Description:
         <input
           required

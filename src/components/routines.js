@@ -22,7 +22,7 @@ function Routines(props) {
   useEffect(() => {}, [routines]);
 
   return (
-    <div>
+    <div className="tabContainer">
       <h1>ROUTINES</h1>
       {props.isLoggedIn && (
         <AddRoutineForm
