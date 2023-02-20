@@ -23,13 +23,12 @@ function Routines(props) {
 
   return (
     <div>
-      {props.user}
+      <h1>ROUTINES</h1>
       {props.isLoggedIn && (
         <AddRoutineForm
           onAddRoutine={getAllRoutines}
         />
       )}
-      <h1>Routines</h1>
       {routines.map((routine) => (
         <div className="routine" key={routine.id}>
           <h1 className="routine-name">{routine.name}</h1>

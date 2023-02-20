@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+  const isRegisteredUser = Boolean(localStorage.getItem("auth_token"));
+
   return (
     <div className="homeContainer">
       <div className="homePhoto">
@@ -12,18 +14,22 @@ const Home = () => {
             className="started"
             onClick={(e) => {
               e.preventDefault();
-              navigate("/register");
+              if (isRegisteredUser) {
+                navigate("/profile");
+              } else {
+                navigate("/register");
+              }
             }}
-            onMouseOver={(e)=>{
-                e.preventDefault();
-                e.target.style.color = 'black'
+            onMouseOver={(e) => {
+              e.preventDefault();
+              e.target.style.color = "black";
             }}
-            onMouseOut={(e)=>{
-                e.preventDefault();
-                e.target.style.color = ''
+            onMouseOut={(e) => {
+              e.preventDefault();
+              e.target.style.color = "";
             }}
           >
-            Get Started Today >>
+            Get Started Today {'>>'}
           </div>
         </div>
       </div>

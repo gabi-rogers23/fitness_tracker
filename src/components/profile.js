@@ -6,7 +6,6 @@ import {
   getUserProfile,
   deleteRoutine,
 } from "../api/api";
-import { AddRoutineForm } from "./exports";
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -31,11 +30,6 @@ const Profile = () => {
       });
   }, [currentToken]);
 
-  // const logout = () => {
-  //   setOnline(false);
-  //   navigate('/');
-  // };
-
   const onDeleteRoutine = (removedRoutine) => {
     setUserRoutines(
       userRoutines.filter((routine) => routine.id !== removedRoutine.id)
@@ -58,24 +52,19 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
+      <h1>MY ROUTINES</h1>
       <div>
-        <h1>MY ROUTINES</h1>
-        <AddRoutineForm onAddRoutine={() => { updateUserRoutines(profile) }} />
         {userRoutines &&
           userRoutines?.map((routine, index) => (
             <div key={routine.id} className="profile-my-routine">
               <h4>Routine: {routine.name}</h4>
               <h5>Goal: {routine.goal}</h5>
-              <h5>Activities:</h5>
-              <ul>
+              <h4>Activities:</h4>
                 {routine.activities?.map((activity) => (
                   <div key={activity.id}>
-                    <li>
-                      <h6>{activity.name}</h6>
-                    </li>
+                      <h5>{activity.name}</h5>
                   </div>
                 ))}
-              </ul>
               <button
                 onClick={(e) => {
                   e.preventDefault();
@@ -96,7 +85,6 @@ const Profile = () => {
               >
                 Delete
               </button>
-              <hr />
             </div>
           ))}
       </div>

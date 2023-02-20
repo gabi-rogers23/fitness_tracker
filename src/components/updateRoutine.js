@@ -86,9 +86,9 @@ const UpdateRoutine = () => {
           Activities:
           {activities.map((activity) => (
             <div key={activity.id}>
-              <div>name: {activity.name}</div>
-              <div>count: {activity.count}</div>
-              <div>duration: {activity.duration}</div>
+              <div>Name: {activity.name}</div>
+              <div>Count: {activity.count}</div>
+              <div>Duration: {activity.duration}</div>
               <UpdateRoutineActivity
                 routineActivity={activity}
                 onUpdateActivity={onUpdateActivity}

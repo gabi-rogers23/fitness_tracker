@@ -32,8 +32,9 @@ body {
 button {
   display: inline-block;
   border: none;
+  border-radius: 3px;
   padding: 0.5rem;
-  margin: 0;
+  margin: 5px;
   text-decoration: none;
   font-size: 0.75rem;
   cursor: pointer;
@@ -157,28 +158,10 @@ button:focus {
 
 /* ACTIVITIES */
 
-.activity {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  border: 1px solid black;
-  height: 100px;
-  width: 600px;
-  margin-top: 15px;
-}
 
 .edit {
   align-self: flex-end;
   width: 100px;
-}
-
-.activityForm {
-  display: flex;
-  flex-direction: column;
-  height: 300px;
-  width: 400px;
-  justify-content: space-evenly;
-  align-items: flex-start;
 }
 
 .updateAButton {
@@ -190,11 +173,13 @@ button:focus {
 }
 
 /* Set a fixed width for the routine container */
-.routine {
+.routine, .activity, .profile-my-routine {
   width: 500px;
   margin: 20px auto;
   border: 2px solid #ccc;
+  border-radius: 3px;
   padding: 20px;
+  
 }
 
 /* Style the routine name */
@@ -239,25 +224,26 @@ button:focus {
   margin-right: 10px;
   padding: 5px 10px;
   border: none;
-  background-color: #4CAF50;
+  background-color: black;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
 }
 
 .routine button:hover {
-  background-color: #3e8e41;
+  background-color: black;
 }
 /* Add Routine form  */
-.formAdd {
+.formAdd, .formU, .activityForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 400px;
+  border: 2px solid #ccc;
+  border-radius: 3px;
+  width: 300px;
   margin: 0 auto;
+  text-align:center;
 }
 
 .label {
@@ -275,7 +261,7 @@ button:focus {
 .buttonAdd[type="submit"] {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #4CAF50;
+  background-color: black;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -284,7 +270,7 @@ button:focus {
 }
 
 .buttonAdd[type="submit"]:hover {
-  background-color: #3e8e41;
+  background-color: black;
 }
 
 /* Update Routine Activity */
@@ -316,7 +302,7 @@ input[type="number"] {
   font-size: 1rem;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-  background-color: #0077ff;
+  background-color: black;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -324,5 +310,5 @@ input[type="number"] {
 }
 
 .buttonU [type="submit"]:hover {
-  background-color: #0066cc;
+  background-color: black;
 }
